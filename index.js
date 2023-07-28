@@ -10,6 +10,8 @@ const Post = require("./routes/post.js");
 app.use(cors());
 app.use(express.json({ limit: "30mb", extend: true }));
 //app.use(express.urlencoded({ limit: "30mb", extend: true }));
+
+//AnaSayfaya geldiğinde auth gelsin istersen / la başla
 app.use("/", Auth);
 app.use("/", Post);
 

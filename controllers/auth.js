@@ -2,6 +2,7 @@ const Auth = require("../models/auth.js");
 const bcrypt = require("bcryptjs");
 const { response } = require("express");
 const jwt = require("jsonwebtoken");
+
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -34,7 +35,9 @@ const login = async (req, res) => {
     const user = await Auth.findOne({ email });
 
     if (!user) {
-      return res.status(500).json({ message: "böyle bir parola bulunamadı" });
+      return res
+        .status(500)
+        .json({ message: "böyle bir kullanıcı bulunamadı" });
     }
     const comparePassword = await bcrypt.compare(password, user.password);
     if (!comparePassword) {
@@ -44,6 +47,7 @@ const login = async (req, res) => {
     const token = jwt.sign({ id: user.id }, process.env.SECRET_TOKEN, {
       expiresIn: "1h",
     });
+
     res.status(200).json({
       status: "OK",
       user,
