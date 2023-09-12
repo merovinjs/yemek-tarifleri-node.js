@@ -7,7 +7,11 @@ const app = express();
 const Auth = require("./routes/auth.js");
 const Post = require("./routes/post.js");
 
-app.options("*", cors());
+app.use(
+  cors({
+    origin: "https://yemek-tarifleri.vercel.app", // İstemcinin (frontend) alan adı
+  })
+);
 
 app.use(express.json({ limit: "30mb", extend: true }));
 //app.use(express.urlencoded({ limit: "30mb", extend: true }));
