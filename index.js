@@ -7,7 +7,8 @@ const app = express();
 const Auth = require("./routes/auth.js");
 const Post = require("./routes/post.js");
 
-app.use(cors());
+app.options("*", cors());
+
 app.use(express.json({ limit: "30mb", extend: true }));
 //app.use(express.urlencoded({ limit: "30mb", extend: true }));
 
